@@ -38,7 +38,7 @@
 .form-container{
     background: #fff;
     width: 300px;
-    height: 400px;
+    height: 440px;
     position: relative;
     text-align: center;
     padding: 20px 0;
@@ -98,6 +98,17 @@ form a{
     transform: translateX(100px);
     transition: transform 1s;
 }
+.message-container{
+    background: #f2d4d4;
+    width: 300px;
+    height:fit-content;
+    position: relative;
+    text-align: center;
+    padding: 20px 0;
+    margin: auto;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
 
 
 </style>
@@ -123,10 +134,20 @@ form a{
                             <span onclick="register()">Register</span>
                             <hr id="Indicator">
                         </div>
-                        <form id="LoginForm">
-                            <input type="text" placeholder="Username">
-                            <input type="password" placeholder="Password">
-                            <button type="submit" class="btn" style="display: inline-block;
+                        {% if messages %}
+                        <div >
+                            {% for message in messages %}
+                            <div class="alert alert-{{message.tags}}" role="alert">
+                                <b>{{ message }}</b>
+                              </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <form id="LoginForm" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="text" placeholder="Username" name="username">
+                            <input type="password" placeholder="Password" name="password">
+                            <button type="submit" class="btn" name="login" style="display: inline-block;
                             background: #ff523b;
                             color: white;
                             padding: 8px 30px;
@@ -136,20 +157,25 @@ form a{
                             <a href="">Forget Password</a>
                         </form>
 
-                        <form id="RegForm">
-                            <input type="text" placeholder="Username">
-                            <input type="email" placeholder="Email">
-                            <input type="password" placeholder="Password">
-                            <button type="submit" class="btn" style="display: inline-block;
+                        <form id="RegForm" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="text" placeholder="Username" name="username" minlength="4" maxlength="10" required>
+                            <input type="email" placeholder="Email" name="email" required>
+                            <input type="password" placeholder="Password" name="password" minlength="4" max="10" required>
+                            <input type="text" placeholder="Address" name="address" required>
+                            <input type="text" placeholder="phone number" name="phone" required>
+                            <button type="submit" class="btn" name="register" style="display: inline-block;
                             background: #ff523b;
                             color: white;
                             padding: 8px 30px;
-                            margin: 30px 0;
+                            margin: 7px 0;
                             border-radius: 30px;
                             transition: background 0.5s;">Register</button>
                         </form>
+                        
                     </div>
                 </div>
+                <br><br>
             </div>
         </div>
     </div>
