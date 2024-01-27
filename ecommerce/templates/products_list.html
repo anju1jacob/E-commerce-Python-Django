@@ -1,69 +1,72 @@
 {% load static %}
 
 <div class="title-wrapper">
-    <div class="container">
-        <div class="container-inner">
-            <h1><span>All</span> Products</h1>
-            <em>Over 4000 Items are available here</em>
-        </div>
+  <div class="container">
+    <div class="container-inner">
+      <h1><span>All</span> Products</h1>
+      <em>Over 4000 Items are available here</em>
     </div>
+  </div>
 </div>
 
 <div class="main">
-    <div class="container">
-      <ul class="breadcrumb">
-          
-      </ul>
-      <!-- BEGIN SIDEBAR & CONTENT -->
-      <div class="row margin-bottom-40">
-      
-        <!-- BEGIN CONTENT -->
-        <div class="col-md-10 col-sm-7">
-       
-          <!-- BEGIN PRODUCT LIST -->
-          <div class="row product-list">
-            {% for i in products %}
-            <!-- PRODUCT ITEM START -->
-            <div class="col-md-4 col-sm-6 col-xs-12">
-              <div class="product-item">
-                <div class="pi-img-wrapper">
-                  <img src="{{ i.image.url }}" class="img-responsive" alt="Berry Lace Dress">
-                  <div>
-                    <a href="{{ i.image.url }}" class="btn btn-default fancybox-button">Zoom</a>
-                    <a href="{% url 'detail_product' %}" class="btn btn-default fancybox-fast-view">View</a>
-                  </div>
-                </div>
-                <h3><a href="{% url 'detail_product' %}">{{ i.title }}</a></h3>
-                <div class="pi-price">{{ i.price }}</div>
-                <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-              </div>
-            </div>
-            
-         {% endfor %}
-            <!-- PRODUCT ITEM END -->
-            
-          </div>
-          <!-- END PRODUCT LIST -->
-          <!-- BEGIN PAGINATOR -->
-          <div class="row">
-            <div class="col-md-4 col-sm-4 items-info">Items 1 to 9 of 10 total</div>
-            <div class="col-md-8 col-sm-8">
-              <ul class="pagination pull-right">
-                <li><a href="javascript:;">&laquo;</a></li>
-                <li><a href="javascript:;">1</a></li>
-                <li><span>2</span></li>
-                <li><a href="javascript:;">3</a></li>
-                <li><a href="javascript:;">4</a></li>
-                <li><a href="javascript:;">5</a></li>
-                <li><a href="javascript:;">&raquo;</a></li>
-              </ul>
-            </div>
-          </div>
-          <!-- END PAGINATOR -->
-        </div>
-        <!-- END CONTENT -->
-      </div>
-      <!-- END SIDEBAR & CONTENT -->
-    </div>
-  </div>
+  <div class="container">
+    <ul class="breadcrumb">
 
+    </ul>
+    <!-- BEGIN SIDEBAR & CONTENT -->
+    <div class="row margin-bottom-40">
+
+      <!-- BEGIN CONTENT -->
+      <div class="col-md-10 col-sm-7">
+
+        <!-- BEGIN PRODUCT LIST -->
+        <div class="row product-list">
+          {% for i in products %}
+          <!-- PRODUCT ITEM START -->
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="product-item">
+              <div class="pi-img-wrapper">
+                <img src="{{ i.image.url }}" class="img-responsive" alt="Berry Lace Dress">
+                <div>
+                  <a href="{{ i.image.url }}" class="btn btn-default fancybox-button">Zoom</a>
+                  <a href="{% url 'detail_product' %}" class="btn btn-default fancybox-fast-view">View</a>
+                </div>
+              </div>
+              <h3><a href="{% url 'detail_product' %}">{{ i.title }}</a></h3>
+              <div class="pi-price">{{ i.price }}</div>
+              <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+            </div>
+          </div>
+
+          {% endfor %}
+          <!-- PRODUCT ITEM END -->
+
+        </div>
+        <!-- END PRODUCT LIST -->
+        <!-- BEGIN PAGINATOR -->
+        <div class="row">
+          <div class="col-md-4 col-sm-4 items-info"> </div>
+          <div class="col-md-8 col-sm-8">
+            <ul class="pagination pull-right">
+              {% if products.has_previous %}
+              <li><a href="?page={{ products.previous_page_number }}">&laquo;</a></li>
+              {% endif %}
+              
+              {% for i in products.paginator.page_range %}
+              <li><a href="?page={{ i }}"><span>{{ i }}</span></a></li>
+              {% endfor %}
+
+              {% if products.has_next %}
+              <li><a href="?page={{ products.next_page_number }}">&raquo;</a></li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+        <!-- END PAGINATOR -->
+      </div>
+      <!-- END CONTENT -->
+    </div>
+    <!-- END SIDEBAR & CONTENT -->
+  </div>
+</div>
