@@ -42,28 +42,19 @@
                   <p>{{product.description }}</p>
                 </div>
                 <div class="product-page-options">
-                  <div class="pull-left">
-                    <label class="control-label">Size:</label>
-                    <select class="form-control input-sm">
-                      <option>L</option>
-                      <option>M</option>
-                      <option>XL</option>
-                    </select>
-                  </div>
-                  <div class="pull-left">
-                    <label class="control-label">Color:</label>
-                    <select class="form-control input-sm">
-                      <option>Red</option>
-                      <option>Blue</option>
-                      <option>Black</option>
-                    </select>
-                  </div>
+                  
+                  
                 </div>
                 <div class="product-page-cart">
+                  <form action="{% url 'add_to_cart' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                   
                   <div class="product-quantity">
-                      <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
+                      <input id="product-quantity" type="text" name="quantity" value="1" readonly class="form-control input-sm">
                   </div>
+                  <input type="hidden" value="{{ product.id }}" name="product_id" />
                   <button class="btn btn-primary" type="submit">Add to cart</button>
+                </form>
                 </div>
                 
                 <ul class="social-icons">

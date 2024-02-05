@@ -11,10 +11,14 @@
         <!-- BEGIN TOP BAR MENU -->
         <div class="col-md-6 col-sm-6 additional-nav">
           <ul class="list-unstyled list-inline pull-right">
+            {% if not user.is_authenticated %}
+            <li><a href="{% url 'account' %}">Log In/Sign Up</a></li>
+            {% else %}
             <li><a href="shop-account.html">My Account</a></li>
             <li><a href="shop-wishlist.html">My Wishlist</a></li>
             <li><a href="shop-checkout.html">Checkout</a></li>
-            <li><a href="{% url 'account' %}">Log In/Sign Up</a></li>
+            <li><a href="{% url 'logout' %}">LogOut</a></li>
+            {% endif %}
           </ul>
         </div>
         <!-- END TOP BAR MENU -->
@@ -33,9 +37,9 @@
 
       <!-- BEGIN CART -->
       <div class="top-cart-block">
-        
+        {% if user.is_authenticated %}
         <i ><a class="fa fa-shopping-cart" href="{% url 'cart' %}" style="text-decoration: none;"></a></i>
-        
+        {% endif %}
       </div>
       <!--END CART -->
 
