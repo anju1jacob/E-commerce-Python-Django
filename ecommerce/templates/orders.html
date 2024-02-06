@@ -1,0 +1,16 @@
+{% extends 'blank_layout.html' %}
+
+
+{% block content %}
+{% if messages %}
+<div>
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}}" role="alert">
+        <b>{{ message }}</b>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+{% include 'order_container.html' %}
+{% endif %}
+{% endblock content %}

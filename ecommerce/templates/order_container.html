@@ -1,0 +1,61 @@
+{% load static %}
+{% load getstatus %}
+
+<div class="main">
+  <div class="container">
+    <!-- BEGIN SIDEBAR & CONTENT -->
+    <div class="row margin-bottom-40">
+      <!-- BEGIN CONTENT -->
+      <div class="col-md-12 col-sm-12">
+        <h1>My Orders</h1>
+        {% if orders %}
+        <div class="goods-page">
+          <div class="goods-data clearfix">
+            <div class="table-wrapper-responsive">
+            <table summary="Shopping cart">
+              <tr>
+                
+                <th class="goods-page-ref-no">Order No</th>
+                <th class="goods-page-quantity">Date</th>
+                <th class="goods-page-price">Total price</th>
+                <th class="goods-page-total" colspan="2">status</th>
+              </tr>
+              {% for order in orders %}
+              <tr>
+                
+                <td class="goods-page-ref-no">
+                  {{order.id}}
+                </td>
+                <td class="goods-page-ref-no">
+                  <strong> {{order.created_at}}</strong>
+                </td>
+                <td class="goods-page-ref-no">
+                  <strong> {{order.total_price }}</strong>
+                </td>
+                <td class="goods-page-ref-no">
+                  <strong>{% getstatus order.order_status%}</strong>
+                </td>
+                <td class="del-goods-col">
+                  <a class="del-goods" href="javascript:;">&nbsp;</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </table>
+            </div>
+
+            
+          </div>
+          
+        </div>
+        <br><br>
+          {% else %}
+          <h5> empty orders!</h5>
+          {% endif %}
+      </div>
+      <!-- END CONTENT -->
+    </div>
+    <!-- END SIDEBAR & CONTENT -->
+
+   
+  </div>
+</div>

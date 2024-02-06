@@ -16,7 +16,7 @@
             {% else %}
             <li><a href="shop-account.html">My Account</a></li>
             <li><a href="shop-wishlist.html">My Wishlist</a></li>
-            <li><a href="shop-checkout.html">Checkout</a></li>
+            <li><a href="{% url 'orders' %}">Orders</a></li>
             <li><a href="{% url 'logout' %}">LogOut</a></li>
             {% endif %}
           </ul>
