@@ -59,13 +59,6 @@ def checkout_cart(request):
     
 
 @login_required(login_url='account')
-def view_orders(request):
-    user=request.user
-    customer=user.customer_profile
-    
-    return render(request,'cart.html', context)
-
-@login_required(login_url='account')
 def show_orders(request):
     user=request.user
     customer=user.customer_profile
